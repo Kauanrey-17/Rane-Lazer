@@ -161,15 +161,15 @@ export default function StructurePage() {
             <h2 className="text-3xl font-bold text-foreground mb-4">Capacidade Total</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
               <div>
-                <div className="text-4xl font-bold text-primary mb-2">150</div>
-                <div className="text-muted-foreground">Pessoas (evento completo)</div>
+                <div className="text-4xl font-bold text-primary mb-2">70 </div>
+                <div className="text-muted-foreground">Pessoas (evento completo, aumento somente com negociação)</div>
               </div>
               <div>
                 <div className="text-4xl font-bold text-primary mb-2">50</div>
-                <div className="text-muted-foreground">Vagas de estacionamento</div>
+                <div className="text-muted-foreground">Bar no Local</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-primary mb-2">2000m²</div>
+                <div className="text-4xl font-bold text-primary mb-2">300m²</div>
                 <div className="text-muted-foreground">Área total do espaço</div>
               </div>
             </div>

@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
 import { Phone, Mail, MapPin, Clock, MessageCircle, Instagram, Send, Loader2 } from "lucide-react"
 
 type FormDataType = {
@@ -40,8 +39,9 @@ export default function ContactPage() {
     return value
   }
 
+  // Adicionado HTMLSelectElement para suportar o campo de seleção
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     let { name, value } = e.target
 
@@ -113,8 +113,7 @@ ${formData.message || "Nenhuma"}
       title: "Instagram",
       info: "rane_lazer",
       description: "Atendimento de segunda a domingo",
-      action:
-        "https://www.instagram.com/rane_lazer",
+      action: "https://www.instagram.com/rane_lazer",
     },
     {
       icon: MessageCircle,
@@ -135,8 +134,7 @@ ${formData.message || "Nenhuma"}
       title: "Endereço",
       info: "Rua Valdemar Pereira Da Silva, 226",
       description: "Jardim Jaraguá - SP, CEP 05267-180",
-      action:
-        "https://www.google.com/maps/search/Rua+Valdemar+Pereira+Da+Silva+226",
+      action: "https://maps.google.com/?q=Rua+Valdemar+Pereira+Da+Silva,+226",
     },
   ]
 
@@ -163,13 +161,10 @@ ${formData.message || "Nenhuma"}
                 <CardContent className="p-6">
                   <div className="flex gap-4">
                     {React.createElement(item.icon, {
-                      className:
-                        "h-6 w-6 text-primary flex-shrink-0 mt-1",
+                      className: "h-6 w-6 text-primary flex-shrink-0 mt-1",
                     })}
                     <div>
-                      <h3 className="font-semibold text-lg">
-                        {item.title}
-                      </h3>
+                      <h3 className="font-semibold text-lg">{item.title}</h3>
                       <a
                         href={item.action}
                         target="_blank"
@@ -210,21 +205,84 @@ ${formData.message || "Nenhuma"}
           <div className="lg:col-span-2">
             <Card className="border-0 shadow-lg">
               <CardContent className="p-8">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <Input name="name" placeholder="Nome" value={formData.name} onChange={handleInputChange} />
-                  <Input name="email" type="email" placeholder="Email" value={formData.email} onChange={handleInputChange} />
-                  <Input name="phone" placeholder="Telefone" value={formData.phone} onChange={handleInputChange} />
-                  <Textarea name="message" placeholder="Mensagem" value={formData.message} onChange={handleInputChange} />
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <Input 
+                    name="name" 
+                    placeholder="Nome Completo" 
+                    value={formData.name} 
+                    onChange={handleInputChange} 
+                  />
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <Input 
+                      name="email" 
+                      type="email" 
+                      placeholder="Email" 
+                      value={formData.email} 
+                      onChange={handleInputChange} 
+                    />
+                    <Input 
+                      name="phone" 
+                      placeholder="Telefone / WhatsApp" 
+                      value={formData.phone} 
+                      onChange={handleInputChange} 
+                    />
+                  </div>
 
-                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
+                  {/* Campo de Seleção para Tipo de Evento */}
+                  <select
+                    name="eventType"
+                    value={formData.eventType}
+                    onChange={handleInputChange}
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  >
+                    <option value="" disabled>Selecione o tipo de evento</option>
+                    <option value="Aniversário">Aniversário</option>
+                    <option value="Casamento">Casamento</option>
+                    <option value="Confraternização">Confraternização</option>
+                    <option value="Evento Corporativo">Evento Corporativo</option>
+                    <option value="Outro">Outro</option>
+                  </select>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex flex-col gap-1">
+                      <label className="text-xs text-gray-500 ml-1">Data do Evento</label>
+                      <Input 
+                        name="eventDate" 
+                        type="date" 
+                        value={formData.eventDate} 
+                        onChange={handleInputChange} 
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <label className="text-xs text-gray-500 ml-1">Nº de Convidados</label>
+                      <Input 
+                        name="guests" 
+                        type="number" 
+                        placeholder="Ex: 50" 
+                        value={formData.guests} 
+                        onChange={handleInputChange} 
+                      />
+                    </div>
+                  </div>
+
+                  <Textarea 
+                    name="message" 
+                    placeholder="Conte mais sobre o que você precisa..." 
+                    value={formData.message} 
+                    onChange={handleInputChange} 
+                    className="min-h-[120px]"
+                  />
+
+                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90 py-6 text-lg">
                     {loading ? (
                       <>
-                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                        Enviando...
+                        <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                        Enviando Solicitação...
                       </>
                     ) : (
                       <>
-                        <Send className="h-4 w-4 mr-2" />
+                        <Send className="h-5 w-5 mr-2" />
                         Enviar Solicitação
                       </>
                     )}

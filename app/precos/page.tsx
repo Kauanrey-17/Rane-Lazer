@@ -17,10 +17,10 @@ export default function PricingPage() {
       features: [
         "Uso da piscina",
         "1 churrasqueira",
-        "Área verde",
-        "Estacionamento",
         "Wi-Fi gratuito",
-        "Limpeza incluída",
+        "Mesas e cadeiras 14",
+        "2 Geladeiras",
+        "Som basico",
       ],
       popular: false,
       color: "border-border",
@@ -30,16 +30,15 @@ export default function PricingPage() {
       price: "R$ 1.200",
       period: "por 8 horas",
       description: "Perfeito para festas de aniversário e eventos familiares",
-      capacity: "Até 60 pessoas",
+      capacity: "Até 50 pessoas",
       features: [
-        "Uso completo das piscinas",
-        "2 churrasqueiras",
-        "Salão climatizado",
-        "Área verde",
-        "Sistema de som",
-        "Estacionamento",
+        "Uso da piscina aquecida",
+        "Mesas e cadeiras 14",
+        "Churrasqueira",
+        "Área gourmet",
+        "Sistema de som bluetooth",
         "Wi-Fi gratuito",
-        "Limpeza incluída",
+        "2 Geladeiras",
       ],
       popular: true,
       color: "border-primary",
@@ -49,18 +48,17 @@ export default function PricingPage() {
       price: "R$ 1.800",
       period: "por 10 horas",
       description: "Para grandes eventos e celebrações especiais",
-      capacity: "Até 100 pessoas",
+      capacity: "Até 70 pessoas",
       features: [
         "Uso completo do espaço",
-        "Todas as churrasqueiras",
-        "Salão climatizado",
-        "Área verde",
-        "Sistema de som profissional",
+        "Acesso a Area gourmet",
+        "Piscina aquecida",
+        "Sistema de som Paredão",
         "Iluminação especial",
-        "Estacionamento",
         "Wi-Fi gratuito",
         "Limpeza incluída",
         "Suporte de equipe",
+        "2 Geladeiras",
       ],
       popular: false,
       color: "border-secondary",
@@ -246,10 +244,11 @@ export default function PricingPage() {
                   <Gift className="h-5 w-5 text-primary mr-2" />O que está incluído
                 </h3>
                 <ul className="space-y-2 text-muted-foreground">
-                  <li>• Limpeza antes e depois</li>
+                  <li>• Caixinha de som </li>
                   <li>• Mesas e cadeiras básicas</li>
-                  <li>• Utensílios de churrasqueira</li>
+                  <li>• 2 Geladeiras</li>
                   <li>• Segurança e monitoramento</li>
+                  <li>• Churrasqueira e piscina</li>
                 </ul>
               </div>
             </div>
