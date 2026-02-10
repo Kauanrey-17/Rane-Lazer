@@ -25,10 +25,11 @@ export function Footer() {
               eventos, com piscinas, churrasqueiras e muito mais.
             </p>
             <div className="flex space-x-4">
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link href="https://www.facebook.com/ranelazereventos" className="text-muted-foreground hover:text-primary transition-colors">
                 <Facebook className="h-5 w-5" />
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+
+              <Link href="https://www.instagram.com/rane_lazer" className="text-muted-foreground hover:text-primary transition-colors">
                 <Instagram className="h-5 w-5" />
               </Link>
             </div>

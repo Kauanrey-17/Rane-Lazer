@@ -17,13 +17,13 @@ export default function GalleryPage() {
     { id: "piscinas", name: "Piscinas", icon: Waves },
     { id: "churrasqueiras", name: "Churrasqueiras", icon: ChefHat },
     { id: "eventos", name: "Eventos", icon: Users },
-    { id: "area-verde", name: "Área Verde", icon: TreePine },
+    { id: "banco", name: "Banco para Crianças", icon: TreePine },
   ]
 
   const images = [
     {
       id: 1,
-      src: "/placeholder.svg?key=gallery1",
+      src: "/WhatsApp Image 2026-02-10 at 12.56.07.jpeg",
       alt: "Piscina principal com deck",
       category: "piscinas",
       title: "Piscina Principal",
@@ -31,11 +31,11 @@ export default function GalleryPage() {
     },
     {
       id: 2,
-      src: "/placeholder.svg?key=gallery2",
-      alt: "Área de churrasqueiras cobertas",
+      src: "/WhatsApp Image 2026-02-10 at 12.56.17.jpeg",
+      alt: "Área de churrasqueira coberta",
       category: "churrasqueiras",
       title: "Churrasqueiras Cobertas",
-      description: "Espaço coberto com múltiplas churrasqueiras profissionais",
+      description: "Espaço coberto com a churrasqueiras profissionais",
     },
     {
       id: 3,
@@ -47,19 +47,19 @@ export default function GalleryPage() {
     },
     {
       id: 4,
-      src: "/placeholder.svg?key=gallery4",
-      alt: "Jardim com playground",
-      category: "area-verde",
-      title: "Área Verde",
-      description: "Jardim amplo com playground e área de descanso",
+      src: "/WhatsApp Image 2026-02-10 at 12.56.18.jpeg",
+      alt: "Banco para a criançada",
+      category: "banco",
+      title: "Banco para Crianças",
+      description: "Area de descanso com bancos e sombra para os pequenos aproveitarem o dia com conforto",
     },
     {
       id: 5,
-      src: "/placeholder.svg?key=gallery5",
-      alt: "Piscina infantil",
+      src: "/WhatsApp Image 2026-02-10 at 12.56.08.jpeg",
+      alt: "Piscina Aberto ao Publico",
       category: "piscinas",
-      title: "Piscina Infantil",
-      description: "Piscina segura para crianças com profundidade adequada",
+      title: "Piscinas",
+      description: "Piscina segura para crianças e adultos com profundidade adequada",
     },
     {
       id: 6,
@@ -122,7 +122,8 @@ export default function GalleryPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-secondary/10">
+      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-secondary/10"
+      style={{ backgroundImage: "url('/ChatGPT Image 10 de fev. de 2026, 14_23_09.png')" }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">Galeria de Fotos</h1>

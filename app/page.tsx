@@ -21,8 +21,8 @@ export default function HomePage() {
     },
     {
       icon: TreePine,
-      title: "Área Verde",
-      description: "Ambiente natural com muito verde e sombra",
+      title: "Bar",
+      description: "Bar completo com bebidas e snacks para todos os convidados",
     },
     {
       icon: Users,
@@ -68,7 +68,7 @@ export default function HomePage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/beautiful-leisure-area-with-pool--bbq-area--green-.jpg"
+            src="/WhatsApp Image 2026-02-10 at 12.56.16.jpeg"
             alt="Rane Lazer - Espaço de Lazer"
             className="w-full h-full object-cover"
           />
@@ -81,7 +81,7 @@ export default function HomePage() {
             Seu espaço ideal para momentos inesquecíveis
           </h1>
           <p className="text-xl sm:text-2xl mb-8 text-pretty opacity-90">
-            Piscinas, churrasqueiras, área verde e toda estrutura para suas festas e eventos
+            Piscinas, churrasqueiras, bar e toda estrutura para suas festas e eventos
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8 py-3">

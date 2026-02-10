@@ -11,49 +11,40 @@ export default function StructurePage() {
     {
       id: "piscinas",
       title: "Área das Piscinas",
-      capacity: "Até 50 pessoas",
-      description: "Duas piscinas amplas com diferentes profundidades, ideais para adultos e crianças",
-      features: ["Piscina adulto (1,40m)", "Piscina infantil (0,60m)", "Deck molhado", "Chuveiros", "Área de descanso"],
-      image: "/placeholder-8d2nx.png",
+      capacity: "Até 100 pessoas",
+      description: "Uma piscinas com diferentes profundidades, ideais para adultos e crianças",
+      features: ["Piscina adulto (1,40m)", "Piscina infantil (0,60m)", "Deck molhado", "Área de descanso"],
+      image: "/WhatsApp Image 2026-02-10 at 12.56.07.jpeg",
       icon: Waves,
     },
     {
       id: "churrasqueiras",
       title: "Área de Churrasqueiras",
-      capacity: "Até 80 pessoas",
+      capacity: "Até 70 pessoas",
       description: "Espaço coberto com churrasqueiras profissionais e área de preparo completa",
       features: [
-        "4 churrasqueiras grandes",
+        "1 churrasqueiras grandes",
         "Bancadas de apoio",
         "Pia com água corrente",
         "Geladeira disponível",
         "Área coberta",
       ],
-      image: "/covered-bbq-area-with-professional-grills-and-prep.jpg",
+      image: "/WhatsApp Image 2026-02-10 at 12.56.17.jpeg",
       icon: ChefHat,
     },
     {
       id: "salao",
       title: "Salão Principal",
       capacity: "Até 100 pessoas",
-      description: "Salão amplo e climatizado, perfeito para festas e eventos corporativos",
-      features: ["Ar condicionado", "Sistema de som", "Iluminação especial", "Palco pequeno", "Banheiros próximos"],
+      description: "Salão amplo e aberto, perfeito para festas e eventos corporativos",
+      features: ["Sistema de som", "Iluminação especial", "Palco Pequeno", "Banheiros próximos"],
       image: "/spacious-event-hall-with-stage-and-modern-lighting.jpg",
       icon: Users,
-    },
-    {
-      id: "area-verde",
-      title: "Área Verde",
-      capacity: "Espaço livre",
-      description: "Amplo jardim com gramado e árvores, ideal para atividades ao ar livre",
-      features: ["Gramado extenso", "Árvores frutíferas", "Bancos e mesas", "Playground infantil", "Quadra de vôlei"],
-      image: "/large-green-garden-area-with-trees-and-playground-.jpg",
-      icon: TreePine,
     },
   ]
 
   const amenities = [
-    { icon: Car, title: "Estacionamento Gratuito", description: "50 vagas cobertas e descobertas" },
+    { icon: Car, title: "Estacionamento Na Rua", description: "Pode estacionar na rua em volta do local" },
     { icon: Wifi, title: "Wi-Fi Gratuito", description: "Internet de alta velocidade em todo o espaço" },
     { icon: Music, title: "Sistema de Som", description: "Equipamento profissional disponível" },
     { icon: Utensils, title: "Cozinha Equipada", description: "Geladeira, fogão e utensílios básicos" },
@@ -66,7 +57,8 @@ export default function StructurePage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-secondary/10">
+      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-secondary/10"
+      style={{ backgroundImage: "url('/ChatGPT Image 10 de fev. de 2026, 14_23_09.png')" }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">Nossa Estrutura</h1>

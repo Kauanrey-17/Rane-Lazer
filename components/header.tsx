@@ -27,11 +27,11 @@ export function Header() {
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
               <Image
-                src="/logo-rane-lazer.png"
+                src="/Gemini_Generated_Image_45h85n45h85n45h8 (1).png"
                 alt="Rane Lazer - Momentos de Alegria e Celebração"
-                width={280}
-                height={90}
-                className="h-20 w-auto"
+                width={320}
+                height={120}
+                className="h-28 w-auto object-contain"
                 priority
               />
             </Link>

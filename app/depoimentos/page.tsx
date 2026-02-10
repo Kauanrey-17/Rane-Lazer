@@ -94,7 +94,8 @@ export default function TestimonialsPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-secondary/10">
+      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-secondary/10"
+      style={{ backgroundImage: "url('/ChatGPT Image 10 de fev. de 2026, 14_23_09.png')" }}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">Depoimentos</h1>

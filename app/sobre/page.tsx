@@ -26,17 +26,17 @@ export default function AboutPage() {
 
   const team = [
     {
-      name: "Maria Silva",
-      role: "Fundadora & Diretora",
-      description: "15 anos de experiência em eventos e hospitalidade",
+      name: "Alberto Bento",
+      role: "Fundador e dono",
+      description: "8 anos de experiência em eventos e hospitalidade",
     },
     {
-      name: "João Santos",
-      role: "Gerente de Operações",
-      description: "Especialista em logística e coordenação de eventos",
+      name: "Kauan Rey",
+      role: "Gerente de Desenvolvimento",
+      description: "Especialista em Programação e inovação tecnológica para melhorar a experiência do cliente",
     },
     {
-      name: "Ana Costa",
+      name: "Nicole Rane",
       role: "Atendimento ao Cliente",
       description: "Dedicada a tornar cada experiência única e especial",
     },
@@ -47,7 +47,9 @@ export default function AboutPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-secondary/10">
+      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-secondary/10"
+      style={{ backgroundImage: "url('/ChatGPT Image 10 de fev. de 2026, 14_23_09.png')" }}>
+      
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">Sobre a Rane Lazer</h1>
