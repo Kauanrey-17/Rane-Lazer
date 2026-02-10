@@ -1,26 +1,40 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Phone, Mail, MapPin, Clock, MessageCircle, Instagram, Send, Loader2 } from "lucide-react"
+import React, { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  MessageCircle,
+  Instagram,
+  Send,
+  Loader2,
+} from "lucide-react";
 
 type FormDataType = {
-  name: string
-  email: string
-  phone: string
-  eventType: string
-  eventDate: string
-  guests: string
-  message: string
-}
+  name: string;
+  email: string;
+  phone: string;
+  eventType: string;
+  eventDate: string;
+  guests: string;
+  message: string;
+};
 
-export default function ContactPage() {
-  const [loading, setLoading] = useState(false)
+function ContactContent() {
+  const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
+
+  // Verifica se o usuário veio para deixar um depoimento
+  const eDepoimento = searchParams.get("origem") === "depoimento";
 
   const [formData, setFormData] = useState<FormDataType>({
     name: "",
@@ -30,271 +44,222 @@ export default function ContactPage() {
     eventDate: "",
     guests: "",
     message: "",
-  })
+  });
 
   const formatPhone = (value: string) => {
-    value = value.replace(/\D/g, "")
-    value = value.replace(/^(\d{2})(\d)/g, "($1) $2")
-    value = value.replace(/(\d)(\d{4})$/, "$1-$2")
-    return value
-  }
+    value = value.replace(/\D/g, "");
+    value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
+    value = value.replace(/(\d)(\d{4})$/, "$1-$2");
+    return value;
+  };
 
-  // Adicionado HTMLSelectElement para suportar o campo de seleção
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
-    let { name, value } = e.target
-
-    if (name === "phone") value = formatPhone(value)
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
+    let { name, value } = e.target;
+    if (name === "phone") value = formatPhone(value);
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (loading) return
-    setLoading(true)
+    e.preventDefault();
+    if (loading) return;
+    setLoading(true);
 
     if (!formData.name || !formData.email || !formData.phone) {
-      alert("Preencha Nome, Email e Telefone")
-      setLoading(false)
-      return
+      alert("Preencha Nome, Email e Telefone");
+      setLoading(false);
+      return;
     }
 
-    const mensagem = `
-📩 Novo Pedido de Orçamento
+    // Define o título e a estrutura da mensagem baseada no tipo (Orçamento ou Depoimento)
+    const titulo = eDepoimento
+      ? "🌟 Novo Depoimento"
+      : "📩 Novo Pedido de Orçamento";
+
+    const mensagemZap = `
+${titulo}
 
 👤 Nome: ${formData.name}
 📧 Email: ${formData.email}
 📱 Telefone: ${formData.phone}
-
-🎉 Evento: ${formData.eventType || "Não informado"}
+${
+  !eDepoimento
+    ? `🎉 Evento: ${formData.eventType || "Não informado"}
 📅 Data: ${formData.eventDate || "Não informada"}
-👥 Convidados: ${formData.guests || "Não informado"}
+👥 Convidados: ${formData.guests || "Não informado"}`
+    : ""
+}
 
-📝 Mensagem:
+📝 Mensagem/Depoimento:
 ${formData.message || "Nenhuma"}
-    `
+    `;
 
-    const numero = "5511987772482"
-    const whatsappURL = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`
-    const assunto = "Novo Pedido de Orçamento - Site"
-    const emailURL = `mailto:ranelazer@gmail.com?subject=${encodeURIComponent(
-      assunto
-    )}&body=${encodeURIComponent(mensagem)}`
+    const numero = "5511987772482";
+    const whatsappURL = `https://wa.me/${numero}?text=${encodeURIComponent(mensagemZap)}`;
 
-    if (typeof window !== "undefined") {
-      window.open(whatsappURL, "_blank")
+    // Dispara para o WhatsApp
+    window.open(whatsappURL, "_blank");
 
-      setTimeout(() => {
-        window.location.href = emailURL
-      }, 1200)
-    }
+    // Opcional: Enviar também via Mailto (ou sua API Route se preferir)
+    const assuntoEmail = eDepoimento
+      ? "Depoimento de Cliente - Site"
+      : "Orçamento de Evento - Site";
+    const emailURL = `mailto:ranelazer@gmail.com?subject=${encodeURIComponent(assuntoEmail)}&body=${encodeURIComponent(mensagemZap)}`;
 
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      eventType: "",
-      eventDate: "",
-      guests: "",
-      message: "",
-    })
+    setTimeout(() => {
+      window.location.href = emailURL;
+      setLoading(false);
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        eventType: "",
+        eventDate: "",
+        guests: "",
+        message: "",
+      });
+    }, 1000);
+  };
 
-    setTimeout(() => setLoading(false), 1500)
-  }
+  return (
+    <section className="py-20 px-4 max-w-6xl mx-auto">
+      <h1 className="text-4xl font-bold mb-2">
+        {eDepoimento ? "Deixe seu Depoimento" : "Entre em Contato"}
+      </h1>
+      <p className="text-gray-600 mb-10">
+        {eDepoimento
+          ? "Compartilhe sua experiência na Rane Lazer com a gente!"
+          : "Preencha o formulário abaixo e entraremos em contato em breve"}
+      </p>
 
-  const contactInfo = [
-    {
-      icon: Instagram,
-      title: "Instagram",
-      info: "rane_lazer",
-      description: "Atendimento de segunda a domingo",
-      action: "https://www.instagram.com/rane_lazer",
-    },
-    {
-      icon: MessageCircle,
-      title: "WhatsApp",
-      info: "(11) 98777-2482",
-      description: "Resposta rápida e direta",
-      action: "https://wa.me/5511987772482",
-    },
-    {
-      icon: Mail,
-      title: "E-mail",
-      info: "ranelazer@gmail.com",
-      description: "Resposta em até 24 horas",
-      action: "mailto:ranelazer@gmail.com",
-    },
-    {
-      icon: MapPin,
-      title: "Endereço",
-      info: "Rua Valdemar Pereira Da Silva, 226",
-      description: "Jardim Jaraguá - SP, CEP 05267-180",
-      action: "https://maps.google.com/?q=Rua+Valdemar+Pereira+Da+Silva,+226",
-    },
-  ]
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Lado Esquerdo: Info de Contato (Seu código original aqui) */}
+        <div className="space-y-6">
+          <Card className="border-0 shadow-sm bg-primary/5">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Clock className="h-5 w-5" /> Horários
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm space-y-2">
+              <p>Segunda a Sexta: 8h às 18h</p>
+              <p>Finais de Semana: 8h às 22h</p>
+            </CardContent>
+          </Card>
+        </div>
 
-  const businessHours = [
-    { day: "Segunda a Sexta", hours: "8h às 18h" },
-    { day: "Sábados", hours: "8h às 22h" },
-    { day: "Domingos e Feriados", hours: "8h às 22h" },
-  ]
+        {/* Lado Direito: Formulário */}
+        <div className="lg:col-span-2">
+          <Card className="border-0 shadow-lg">
+            <CardContent className="p-8">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <Input
+                  name="name"
+                  placeholder="Nome Completo"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                />
 
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Input
+                    name="email"
+                    type="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <Input
+                    name="phone"
+                    placeholder="Telefone / WhatsApp"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+
+                {!eDepoimento && (
+                  <>
+                    <select
+                      name="eventType"
+                      value={formData.eventType}
+                      onChange={handleInputChange}
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                    >
+                      <option value="" disabled>
+                        Selecione o tipo de evento
+                      </option>
+                      <option value="Aniversário">Aniversário</option>
+                      <option value="Casamento">Casamento</option>
+                      <option value="Outro">Outro</option>
+                    </select>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <Input
+                        name="eventDate"
+                        type="date"
+                        value={formData.eventDate}
+                        onChange={handleInputChange}
+                      />
+                      <Input
+                        name="guests"
+                        type="number"
+                        placeholder="Nº de Convidados"
+                        value={formData.guests}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                  </>
+                )}
+
+                <Textarea
+                  name="message"
+                  placeholder={
+                    eDepoimento
+                      ? "Escreva aqui seu depoimento..."
+                      : "Conte mais sobre o que você precisa..."
+                  }
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  className="min-h-[120px]"
+                />
+
+                <Button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-primary py-6 text-lg"
+                >
+                  {loading ? (
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  ) : (
+                    <Send className="mr-2 h-5 w-5" />
+                  )}
+                  {eDepoimento ? "Enviar Depoimento" : "Enviar Solicitação"}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-
-      <section className="py-20 px-4 max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-2">Entre em Contato</h1>
-        <p className="text-gray-600 mb-10">
-          Preencha o formulário abaixo e entraremos em contato em breve
-        </p>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="space-y-6">
-            {contactInfo.map((item, index) => (
-              <Card key={index} className="border-0 shadow-sm">
-                <CardContent className="p-6">
-                  <div className="flex gap-4">
-                    {React.createElement(item.icon, {
-                      className: "h-6 w-6 text-primary flex-shrink-0 mt-1",
-                    })}
-                    <div>
-                      <h3 className="font-semibold text-lg">{item.title}</h3>
-                      <a
-                        href={item.action}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline font-medium"
-                      >
-                        {item.info}
-                      </a>
-                      <p className="text-sm text-gray-600 mt-1">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-
-            <Card className="border-0 shadow-sm bg-primary/5">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Clock className="h-5 w-5" />
-                  Horário de Funcionamento
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {businessHours.map((hour, index) => (
-                  <div key={index} className="flex justify-between">
-                    <span className="font-medium">{hour.day}</span>
-                    <span className="text-primary font-semibold">
-                      {hour.hours}
-                    </span>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="lg:col-span-2">
-            <Card className="border-0 shadow-lg">
-              <CardContent className="p-8">
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <Input 
-                    name="name" 
-                    placeholder="Nome Completo" 
-                    value={formData.name} 
-                    onChange={handleInputChange} 
-                  />
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Input 
-                      name="email" 
-                      type="email" 
-                      placeholder="Email" 
-                      value={formData.email} 
-                      onChange={handleInputChange} 
-                    />
-                    <Input 
-                      name="phone" 
-                      placeholder="Telefone / WhatsApp" 
-                      value={formData.phone} 
-                      onChange={handleInputChange} 
-                    />
-                  </div>
-
-                  {/* Campo de Seleção para Tipo de Evento */}
-                  <select
-                    name="eventType"
-                    value={formData.eventType}
-                    onChange={handleInputChange}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  >
-                    <option value="" disabled>Selecione o tipo de evento</option>
-                    <option value="Aniversário">Aniversário</option>
-                    <option value="Casamento">Casamento</option>
-                    <option value="Confraternização">Confraternização</option>
-                    <option value="Evento Corporativo">Evento Corporativo</option>
-                    <option value="Outro">Outro</option>
-                  </select>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex flex-col gap-1">
-                      <label className="text-xs text-gray-500 ml-1">Data do Evento</label>
-                      <Input 
-                        name="eventDate" 
-                        type="date" 
-                        value={formData.eventDate} 
-                        onChange={handleInputChange} 
-                      />
-                    </div>
-                    <div className="flex flex-col gap-1">
-                      <label className="text-xs text-gray-500 ml-1">Nº de Convidados</label>
-                      <Input 
-                        name="guests" 
-                        type="number" 
-                        placeholder="Ex: 50" 
-                        value={formData.guests} 
-                        onChange={handleInputChange} 
-                      />
-                    </div>
-                  </div>
-
-                  <Textarea 
-                    name="message" 
-                    placeholder="Conte mais sobre o que você precisa..." 
-                    value={formData.message} 
-                    onChange={handleInputChange} 
-                    className="min-h-[120px]"
-                  />
-
-                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90 py-6 text-lg">
-                    {loading ? (
-                      <>
-                        <Loader2 className="h-5 w-5 mr-2 animate-spin" />
-                        Enviando Solicitação...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="h-5 w-5 mr-2" />
-                        Enviar Solicitação
-                      </>
-                    )}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
+      {/* O Suspense é obrigatório no Next.js ao usar useSearchParams */}
+      <Suspense
+        fallback={<div className="py-20 text-center">Carregando...</div>}
+      >
+        <ContactContent />
+      </Suspense>
       <Footer />
     </div>
-  )
+  );
 }

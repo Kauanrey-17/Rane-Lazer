@@ -69,13 +69,13 @@ export default function AboutPage() {
               <div className="space-y-4 text-muted-foreground">
                 <p>
                   A Rane Lazer nasceu do sonho de criar um espaço onde famílias e amigos pudessem se reunir para
-                  celebrar os momentos mais importantes da vida. Fundada em 2015, nossa empresa começou como um pequeno
+                  celebrar os momentos mais importantes da vida. Fundada em 2019, nossa empresa começou como um pequeno
                   espaço de lazer e cresceu para se tornar referência na região.
                 </p>
                 <p>
                   Ao longo dos anos, investimos constantemente em melhorias na infraestrutura, sempre pensando no
                   conforto e segurança dos nossos clientes. Hoje, oferecemos uma das mais completas estruturas de lazer
-                  da cidade, com piscinas, churrasqueiras, área verde e muito mais.
+                  da cidade, com piscina aquecida, churrasqueiras, bar e muito mais.
                 </p>
                 <p>
                   Nossa missão é proporcionar experiências únicas e memoráveis, cuidando de cada detalhe para que você
@@ -85,7 +85,7 @@ export default function AboutPage() {
             </div>
             <div className="relative">
               <img
-                src="/placeholder-rbcn9.png"
+                src="/WhatsApp Image 2026-02-10 at 17.29.14.jpeg"
                 alt="Família aproveitando o espaço de lazer"
                 className="rounded-lg shadow-lg w-full h-auto"
               />

@@ -84,13 +84,13 @@ export default function PricingPage() {
     {
       title: "Cliente Fidelidade",
       description: "A partir do 3º evento no ano",
-      discount: "15% OFF",
+      discount: "10% OFF",
       icon: Star,
     },
     {
-      title: "Eventos Corporativos",
-      description: "Para empresas e organizações",
-      discount: "20% OFF",
+      title: "Recomendação de Clientes",
+      description: "Quando sua recomendação resultar em uma nova reserva",
+      discount: "10% OFF",
       icon: Users,
     },
   ]

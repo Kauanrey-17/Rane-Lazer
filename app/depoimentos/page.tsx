@@ -1,15 +1,23 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { Star, Quote, ChevronLeft, ChevronRight, Users, Heart, Award } from "lucide-react"
+import { useState } from "react";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import {
+  Star,
+  Quote,
+  ChevronLeft,
+  ChevronRight,
+  Users,
+  Heart,
+  Award,
+} from "lucide-react";
 
 export default function TestimonialsPage() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   const testimonials = [
     {
@@ -66,41 +74,54 @@ export default function TestimonialsPage() {
       text: "Festa perfeita para crianças! Meu filho e os amiguinhos se divertiram muito na piscina e no playground. O local é muito seguro, limpo e organizado. Os pais também aproveitaram bastante. Parabéns pela excelência no atendimento!",
       image: "/placeholder.svg?key=testimonial6",
     },
-  ]
+  ];
 
   const stats = [
     { icon: Users, value: "500+", label: "Eventos Realizados" },
     { icon: Star, value: "4.9", label: "Avaliação Média" },
     { icon: Heart, value: "100%", label: "Clientes Satisfeitos" },
     { icon: Award, value: "5", label: "Anos de Experiência" },
-  ]
+  ];
 
   const nextTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-  }
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
 
   const prevTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))
-  }
+    setCurrentTestimonial((prev) =>
+      prev === 0 ? testimonials.length - 1 : prev - 1,
+    );
+  };
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
-      <Star key={i} className={`h-4 w-4 ${i < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`} />
-    ))
-  }
+      <Star
+        key={i}
+        className={`h-4 w-4 ${i < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
+      />
+    ));
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-secondary/10"
-      style={{ backgroundImage: "url('/ChatGPT Image 10 de fev. de 2026, 14_23_09.png')" }}>
+      <section
+        className="relative py-20 bg-gradient-to-r from-primary/10 to-secondary/10"
+        style={{
+          backgroundImage:
+            "url('/ChatGPT Image 10 de fev. de 2026, 14_23_09.png')",
+        }}
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">Depoimentos</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
+              Depoimentos
+            </h1>
             <p className="text-xl text-muted-foreground">
-              Veja o que nossos clientes falam sobre suas experiências na Rane Lazer
+              Veja o que nossos clientes falam sobre suas experiências na Rane
+              Lazer
             </p>
           </div>
         </div>
@@ -115,7 +136,9 @@ export default function TestimonialsPage() {
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
                   <stat.icon className="h-8 w-8 text-primary" />
                 </div>
-                <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
+                <div className="text-3xl font-bold text-primary mb-2">
+                  {stat.value}
+                </div>
                 <div className="text-muted-foreground">{stat.label}</div>
               </div>
             ))}
@@ -127,9 +150,12 @@ export default function TestimonialsPage() {
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Depoimento em Destaque</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              Depoimento em Destaque
+            </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Histórias reais de clientes que confiaram em nosso espaço para seus momentos especiais
+              Histórias reais de clientes que confiaram em nosso espaço para
+              seus momentos especiais
             </p>
           </div>
 
@@ -154,9 +180,15 @@ export default function TestimonialsPage() {
                     </div>
 
                     <div className="text-center lg:text-left">
-                      <h4 className="font-semibold text-foreground text-lg">{testimonials[currentTestimonial].name}</h4>
-                      <p className="text-primary font-medium">{testimonials[currentTestimonial].event}</p>
-                      <p className="text-muted-foreground text-sm">{testimonials[currentTestimonial].date}</p>
+                      <h4 className="font-semibold text-foreground text-lg">
+                        {testimonials[currentTestimonial].name}
+                      </h4>
+                      <p className="text-primary font-medium">
+                        {testimonials[currentTestimonial].event}
+                      </p>
+                      <p className="text-muted-foreground text-sm">
+                        {testimonials[currentTestimonial].date}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -202,19 +234,29 @@ export default function TestimonialsPage() {
       <section className="py-16 bg-card">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Todos os Depoimentos</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              Todos os Depoimentos
+            </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Leia mais histórias de sucesso e momentos especiais vividos em nosso espaço
+              Leia mais histórias de sucesso e momentos especiais vividos em
+              nosso espaço
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {testimonials.map((testimonial) => (
-              <Card key={testimonial.id} className="border-border hover:shadow-lg transition-shadow duration-300">
+              <Card
+                key={testimonial.id}
+                className="border-border hover:shadow-lg transition-shadow duration-300"
+              >
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-2 mb-4">{renderStars(testimonial.rating)}</div>
+                  <div className="flex items-center gap-2 mb-4">
+                    {renderStars(testimonial.rating)}
+                  </div>
 
-                  <p className="text-muted-foreground mb-4 text-sm line-clamp-4">"{testimonial.text}"</p>
+                  <p className="text-muted-foreground mb-4 text-sm line-clamp-4">
+                    "{testimonial.text}"
+                  </p>
 
                   <div className="border-t border-border pt-4">
                     <div className="flex items-center gap-3">
@@ -222,9 +264,15 @@ export default function TestimonialsPage() {
                         <Users className="h-5 w-5 text-primary" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-foreground text-sm">{testimonial.name}</h4>
-                        <p className="text-primary text-xs font-medium truncate">{testimonial.event}</p>
-                        <p className="text-muted-foreground text-xs">{testimonial.date}</p>
+                        <h4 className="font-semibold text-foreground text-sm">
+                          {testimonial.name}
+                        </h4>
+                        <p className="text-primary text-xs font-medium truncate">
+                          {testimonial.event}
+                        </p>
+                        <p className="text-muted-foreground text-xs">
+                          {testimonial.date}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -239,14 +287,23 @@ export default function TestimonialsPage() {
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-primary/5 rounded-2xl p-8 text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Já foi nosso cliente?</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              Já foi nosso cliente?
+            </h2>
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Compartilhe sua experiência conosco! Seu depoimento ajuda outras pessoas a conhecerem nosso trabalho e nos
-              motiva a continuar oferecendo o melhor serviço.
+              Compartilhe sua experiência conosco! Seu depoimento ajuda outras
+              pessoas a conhecerem nosso trabalho e nos motiva a continuar
+              oferecendo o melhor serviço.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
-                <Link href="/contato">Deixar Depoimento</Link>
+              {/*Altere apenas o Link do botão "Deixar Depoimento*/}
+              <Button
+                asChild
+                size="lg"
+                className="bg-primary hover:bg-primary/90"
+              >
+                {/* Adicionamos um parâmetro na URL para o formulário saber que é depoimento */}
+                <Link href="/contato?origem=depoimento">Deixar Depoimento</Link>
               </Button>
               <Button asChild size="lg" variant="outline">
                 <Link href="/galeria">Ver Galeria</Link>
@@ -259,12 +316,20 @@ export default function TestimonialsPage() {
       {/* CTA */}
       <section className="py-16 bg-primary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-primary-foreground mb-4">Seja o próximo a criar memórias especiais</h2>
+          <h2 className="text-3xl font-bold text-primary-foreground mb-4">
+            Seja o próximo a criar memórias especiais
+          </h2>
           <p className="text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-            Junte-se aos nossos clientes satisfeitos e reserve já o seu espaço para momentos inesquecíveis
+            Junte-se aos nossos clientes satisfeitos e reserve já o seu espaço
+            para momentos inesquecíveis
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" variant="secondary" className="text-lg px-8 py-3">
+            <Button
+              asChild
+              size="lg"
+              variant="secondary"
+              className="text-lg px-8 py-3"
+            >
               <Link href="/contato">Reservar Agora</Link>
             </Button>
             <Button
@@ -281,5 +346,5 @@ export default function TestimonialsPage() {
 
       <Footer />
     </div>
-  )
+  );
 }
