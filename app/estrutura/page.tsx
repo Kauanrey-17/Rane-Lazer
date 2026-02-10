@@ -165,8 +165,8 @@ export default function StructurePage() {
                 <div className="text-muted-foreground">Pessoas (evento completo, aumento somente com negociação)</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-primary mb-2">50</div>
-                <div className="text-muted-foreground">Bar no Local</div>
+                <div className="text-4xl font-bold text-primary mb-2">14</div>
+                <div className="text-muted-foreground">Conjunto de cadeiras</div>
               </div>
               <div>
                 <div className="text-4xl font-bold text-primary mb-2">300m²</div>
