@@ -68,10 +68,11 @@ export default function PricingPage() {
   const additionalServices = [
     { service: "Hora adicional", price: "R$ 100" },
     { service: "Decoração básica", price: "R$ 200" },
-    { service: "Serviço de garçom", price: "R$ 150/dia" },
+    { service: "Serviço de garçom", price: "R$ 200/dia" },
     { service: "Equipamento de som extra", price: "R$ 100" },
     { service: "Limpeza pós-evento", price: "R$ 150" },
     { service: "Segurança adicional", price: "R$ 200/dia" },
+    { service: "Churrasqueiro", price: "R$ 300/dia" },
   ]
 
   const discounts = [
