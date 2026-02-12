@@ -17,6 +17,7 @@ export function Header() {
     { name: "Galeria", href: "/galeria" },
     { name: "Depoimentos", href: "/depoimentos" },
     { name: "Contato", href: "/contato" },
+    { name: "Agenda", href: "/agendar" }, // Novo link adicionado
   ]
 
   return (

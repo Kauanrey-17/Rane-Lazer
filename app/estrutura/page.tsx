@@ -38,7 +38,7 @@ export default function StructurePage() {
       capacity: "Até 100 pessoas",
       description: "Salão amplo e aberto, perfeito para festas e eventos corporativos",
       features: ["Sistema de som", "Iluminação especial", "Palco Pequeno", "Banheiros próximos"],
-      image: "/spacious-event-hall-with-stage-and-modern-lighting.jpg",
+      image: "/WhatsApp Image 2026-02-10 at 20.53.06.jpeg",
       icon: Users,
     },
   ]

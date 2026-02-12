@@ -1,25 +1,40 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import Link from "next/link"
-import { X, ChevronLeft, ChevronRight, Waves, ChefHat, Users, TreePine, Camera } from "lucide-react"
+import { useState } from "react";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
+import {
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Waves,
+  ChefHat,
+  Users,
+  TreePine,
+  Camera,Flame,
+  Wine,
+  Baby,
+  Speaker,
+  Tent,
+
+} from "lucide-react";
 
 export default function GalleryPage() {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null)
-  const [selectedCategory, setSelectedCategory] = useState<string>("all")
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   const categories = [
-    { id: "all", name: "Todas", icon: Camera },
-    { id: "piscinas", name: "Piscinas", icon: Waves },
-    { id: "churrasqueiras", name: "Churrasqueiras", icon: ChefHat },
-    { id: "eventos", name: "Eventos", icon: Users },
-    { id: "banco", name: "Banco para Crianças", icon: TreePine },
-  ]
-
+    { id: "all", name: "Todas", icon: Camera }, // geral / galeria
+    { id: "piscinas", name: "Piscinas", icon: Waves }, // água / piscina
+    { id: "churrasqueiras", name: "Churrasqueiras", icon: Flame }, // churrasco 🔥
+    { id: "bar", name: "Bar", icon: Wine }, // bebidas
+    { id: "banco", name: "Banco para Crianças", icon: Baby }, // infantil 👶
+    { id: "som", name: "Som", icon: Speaker }, // som profissional
+    { id: "palco", name: "Palco", icon: Tent }, // estrutura / palco
+  ];
   const images = [
     {
       id: 1,
@@ -39,11 +54,11 @@ export default function GalleryPage() {
     },
     {
       id: 3,
-      src: "/placeholder.svg?key=gallery3",
-      alt: "Festa de aniversário no salão",
-      category: "eventos",
-      title: "Festa de Aniversário",
-      description: "Celebração familiar no salão climatizado",
+      src: "/WhatsApp Image 2026-02-10 at 20.56.18.jpeg",
+      alt: "Bar com bebidas variadas",
+      category: "bar",
+      title: "Bar com bebidas variadas",
+      description: "Bar completo com bebidas variadas e equipamentos profissionais",
     },
     {
       id: 4,
@@ -51,7 +66,8 @@ export default function GalleryPage() {
       alt: "Banco para a criançada",
       category: "banco",
       title: "Banco para Crianças",
-      description: "Area de descanso com bancos e sombra para os pequenos aproveitarem o dia com conforto",
+      description:
+        "Area de descanso com bancos e sombra para os pequenos aproveitarem o dia com conforto",
     },
     {
       id: 5,
@@ -59,74 +75,71 @@ export default function GalleryPage() {
       alt: "Piscina Aberto ao Publico",
       category: "piscinas",
       title: "Piscinas",
-      description: "Piscina segura para crianças e adultos com profundidade adequada",
+      description:
+        "Piscina segura para crianças e adultos com profundidade adequada",
     },
     {
       id: 6,
-      src: "/placeholder.svg?key=gallery6",
-      alt: "Churrasco em família",
-      category: "churrasqueiras",
-      title: "Momento Família",
-      description: "Família aproveitando o espaço de churrasqueira",
+      src: "/WhatsApp Image 2026-02-10 at 20.59.49.jpeg",
+      alt: "Sistema de som Paredão",
+      category: "som",
+      title: "Sistema de Som Paredão",
+      description: "Equipamento profissional de som para eventos e festas",
     },
     {
       id: 7,
-      src: "/placeholder.svg?key=gallery7",
-      alt: "Evento corporativo",
-      category: "eventos",
-      title: "Evento Corporativo",
-      description: "Confraternização de empresa no espaço completo",
+      src: "/WhatsApp Image 2026-02-10 at 20.59.50.jpeg",
+      alt: "Palco para eventos e shows",
+      category: "palco",
+      title: "Palco para Eventos e Shows",
+      description: "Palco completo para apresentações e eventos de grande escala",
     },
-    {
-      id: 8,
-      src: "/placeholder.svg?key=gallery8",
-      alt: "Quadra de vôlei",
-      category: "area-verde",
-      title: "Quadra de Vôlei",
-      description: "Espaço para atividades esportivas e recreação",
-    },
-    {
-      id: 9,
-      src: "/placeholder.svg?key=gallery9",
-      alt: "Vista geral do espaço",
-      category: "all",
-      title: "Vista Geral",
-      description: "Visão panorâmica de todo o espaço de lazer",
-    },
-  ]
+  ];
 
-  const filteredImages = selectedCategory === "all" ? images : images.filter((img) => img.category === selectedCategory)
+  const filteredImages =
+    selectedCategory === "all"
+      ? images
+      : images.filter((img) => img.category === selectedCategory);
 
   const openModal = (index: number) => {
-    setSelectedImage(index)
-  }
+    setSelectedImage(index);
+  };
 
   const closeModal = () => {
-    setSelectedImage(null)
-  }
+    setSelectedImage(null);
+  };
 
   const nextImage = () => {
     if (selectedImage !== null) {
-      setSelectedImage((selectedImage + 1) % filteredImages.length)
+      setSelectedImage((selectedImage + 1) % filteredImages.length);
     }
-  }
+  };
 
   const prevImage = () => {
     if (selectedImage !== null) {
-      setSelectedImage(selectedImage === 0 ? filteredImages.length - 1 : selectedImage - 1)
+      setSelectedImage(
+        selectedImage === 0 ? filteredImages.length - 1 : selectedImage - 1,
+      );
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-secondary/10"
-      style={{ backgroundImage: "url('/ChatGPT Image 10 de fev. de 2026, 14_23_09.png')" }}>
+      <section
+        className="relative py-20 bg-gradient-to-r from-primary/10 to-secondary/10"
+        style={{
+          backgroundImage:
+            "url('/ChatGPT Image 10 de fev. de 2026, 14_23_09.png')",
+        }}
+      >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">Galeria de Fotos</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
+              Galeria de Fotos
+            </h1>
             <p className="text-xl text-muted-foreground">
               Veja como nosso espaço pode ser perfeito para seu próximo evento
             </p>
@@ -141,7 +154,9 @@ export default function GalleryPage() {
             {categories.map((category) => (
               <Button
                 key={category.id}
-                variant={selectedCategory === category.id ? "default" : "outline"}
+                variant={
+                  selectedCategory === category.id ? "default" : "outline"
+                }
                 onClick={() => setSelectedCategory(category.id)}
                 className="flex items-center gap-2"
               >
@@ -179,7 +194,8 @@ export default function GalleryPage() {
                 </div>
 
                 <Badge className="absolute top-3 right-3 bg-primary/90 text-primary-foreground">
-                  {categories.find((cat) => cat.id === image.category)?.name || "Geral"}
+                  {categories.find((cat) => cat.id === image.category)?.name ||
+                    "Geral"}
                 </Badge>
               </div>
             ))}
@@ -187,7 +203,9 @@ export default function GalleryPage() {
 
           {filteredImages.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-muted-foreground text-lg">Nenhuma imagem encontrada nesta categoria.</p>
+              <p className="text-muted-foreground text-lg">
+                Nenhuma imagem encontrada nesta categoria.
+              </p>
             </div>
           )}
         </div>
@@ -204,12 +222,21 @@ export default function GalleryPage() {
             />
 
             <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-4 rounded-b-lg">
-              <h3 className="font-semibold text-lg mb-1">{filteredImages[selectedImage].title}</h3>
-              <p className="text-sm opacity-90">{filteredImages[selectedImage].description}</p>
+              <h3 className="font-semibold text-lg mb-1">
+                {filteredImages[selectedImage].title}
+              </h3>
+              <p className="text-sm opacity-90">
+                {filteredImages[selectedImage].description}
+              </p>
             </div>
 
             {/* Close Button */}
-            <Button variant="secondary" size="sm" className="absolute top-4 right-4" onClick={closeModal}>
+            <Button
+              variant="secondary"
+              size="sm"
+              className="absolute top-4 right-4"
+              onClick={closeModal}
+            >
               <X className="h-4 w-4" />
             </Button>
 
@@ -243,9 +270,12 @@ export default function GalleryPage() {
       <section className="py-16 bg-card">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Momentos Especiais</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              Momentos Especiais
+            </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Cada foto conta uma história de alegria e celebração no nosso espaço
+              Cada foto conta uma história de alegria e celebração no nosso
+              espaço
             </p>
           </div>
 
@@ -273,12 +303,19 @@ export default function GalleryPage() {
       {/* CTA */}
       <section className="py-16 bg-primary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-primary-foreground mb-4">Crie suas próprias memórias</h2>
+          <h2 className="text-3xl font-bold text-primary-foreground mb-4">
+            Crie suas próprias memórias
+          </h2>
           <p className="text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
             Reserve nosso espaço e seja o próximo a criar momentos inesquecíveis
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" variant="secondary" className="text-lg px-8 py-3">
+            <Button
+              asChild
+              size="lg"
+              variant="secondary"
+              className="text-lg px-8 py-3"
+            >
               <Link href="/contato">Reservar Agora</Link>
             </Button>
             <Button
@@ -295,5 +332,5 @@ export default function GalleryPage() {
 
       <Footer />
     </div>
-  )
+  );
 }
