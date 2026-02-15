@@ -71,7 +71,7 @@ function ScheduleContent() {
         <div className="lg:col-span-3">
           <Card className="border-0 shadow-lg overflow-hidden min-h-[600px]">
             <Cal
-              calLink="rane-lazer/reserva" // IMPORTANTE: Substitua pelo seu link do Cal.com
+              calLink="/lazer-rane-84l2pg/reserva" // IMPORTANTE: Substitua pelo seu link do Cal.com
               style={{ width: "100%", height: "100%", minHeight: "600px" }}
               config={{ layout: 'month_view' }}
             />

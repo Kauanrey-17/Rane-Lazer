@@ -107,7 +107,7 @@ ${formData.message || "Nenhuma"}
     const assuntoEmail = eDepoimento
       ? "Depoimento de Cliente - Site"
       : "Orçamento de Evento - Site";
-    const emailURL = `mailto:ranelazer@gmail.com?subject=${encodeURIComponent(assuntoEmail)}&body=${encodeURIComponent(mensagemZap)}`;
+    const emailURL = `mailto:lazerrane0@gmail.com?subject=${encodeURIComponent(assuntoEmail)}&body=${encodeURIComponent(mensagemZap)}`;
 
     setTimeout(() => {
       window.location.href = emailURL;
