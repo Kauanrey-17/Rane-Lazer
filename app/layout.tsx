@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
+import { CartProvider } from "@/context/CartContext"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -18,7 +19,8 @@ export const metadata: Metadata = {
   publisher: "Rane Lazer",
   openGraph: {
     title: "Rane Lazer - Espaço de Lazer para Festas e Eventos",
-    description: "Seu espaço ideal para momentos inesquecíveis. Piscinas, churrasqueiras, área verde e muito mais.",
+    description:
+      "Seu espaço ideal para momentos inesquecíveis. Piscinas, churrasqueiras, área verde e muito mais.",
     url: "https://ranelazer.com.br",
     siteName: "Rane Lazer",
     locale: "pt_BR",
@@ -35,7 +37,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Rane Lazer - Espaço de Lazer para Festas e Eventos",
-    description: "Seu espaço ideal para momentos inesquecíveis. Piscinas, churrasqueiras, área verde e muito mais.",
+    description:
+      "Seu espaço ideal para momentos inesquecíveis. Piscinas, churrasqueiras, área verde e muito mais.",
     images: ["/beautiful-leisure-area-with-pool--bbq-area--green-.jpg"],
   },
   robots: {
@@ -53,13 +56,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
     <html lang="pt-BR">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <Suspense fallback={null}>{children}</Suspense>
+        <CartProvider>
+          <Suspense fallback={null}>
+            {children}
+          </Suspense>
+        </CartProvider>
         <Analytics />
       </body>
     </html>

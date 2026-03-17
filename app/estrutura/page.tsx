@@ -1,212 +1,432 @@
+import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import Link from "next/link"
-import { Waves, ChefHat, TreePine, Users, Car, Wifi, Music, Utensils, Shield, Camera } from "lucide-react"
-
-export default function StructurePage() {
-  const spaces = [
-    {
-      id: "piscinas",
-      title: "Área das Piscinas",
-      capacity: "Até 100 pessoas",
-      description: "Uma piscinas com diferentes profundidades, ideais para adultos e crianças",
-      features: ["Piscina adulto (1,40m)", "Piscina infantil (0,60m)", "Deck molhado", "Área de descanso"],
-      image: "/WhatsApp Image 2026-02-10 at 12.56.07.jpeg",
-      icon: Waves,
-    },
-    {
-      id: "churrasqueiras",
-      title: "Área de Churrasqueiras",
-      capacity: "Até 70 pessoas",
-      description: "Espaço coberto com churrasqueiras profissionais e área de preparo completa",
-      features: [
-        "1 churrasqueiras grandes",
-        "Bancadas de apoio",
-        "Pia com água corrente",
-        "Geladeira disponível",
-        "Área coberta",
-      ],
-      image: "/WhatsApp Image 2026-02-10 at 12.56.17.jpeg",
-      icon: ChefHat,
-    },
-    {
-      id: "salao",
-      title: "Salão Principal",
-      capacity: "Até 100 pessoas",
-      description: "Salão amplo e aberto, perfeito para festas e eventos corporativos",
-      features: ["Sistema de som", "Iluminação especial", "Palco Pequeno", "Banheiros próximos"],
-      image: "/WhatsApp Image 2026-02-10 at 20.53.06.jpeg",
-      icon: Users,
-    },
-  ]
-
-  const amenities = [
-    { icon: Car, title: "Estacionamento Na Rua", description: "Pode estacionar na rua em volta do local" },
-    { icon: Wifi, title: "Wi-Fi Gratuito", description: "Internet de alta velocidade em todo o espaço" },
-    { icon: Music, title: "Sistema de Som", description: "Equipamento profissional disponível" },
-    { icon: Utensils, title: "Cozinha Equipada", description: "Geladeira, fogão e utensílios básicos" },
-    { icon: Shield, title: "Segurança 24h", description: "Monitoramento e segurança completa" },
-    { icon: Camera, title: "Área para Fotos", description: "Cenários naturais para suas lembranças" },
-  ]
-
+import {
+  Waves, ChefHat, Wine, Users, Music, Wifi,
+  Car, Shield, Utensils, Camera, Speaker, ArrowRight,
+  Check, MapPin, Clock, Sparkles
+} from "lucide-react"
+ 
+const ORANGE = "oklch(0.65 0.18 45)"
+const BLUE = "oklch(0.55 0.15 220)"
+ 
+// ─── ÁREAS PRINCIPAIS ─────────────────────────────────────
+const areas = [
+  {
+    id: "piscinas",
+    tag: "01 — Lazer",
+    title: "Área das Piscinas",
+    subtitle: "Refrescante para toda a família",
+    description:
+      "Duas piscinas com profundidades diferentes pensadas para garantir segurança e diversão para todas as idades. Deck molhado, área de descanso e fácil acesso para cadeirantes.",
+    capacity: "Até 70 pessoas",
+    hours: "08h às 22h",
+    features: [
+      "Piscina adulto — 1,40m de profundidade",
+      "Piscina infantil — 0,60m de profundidade",
+      "Deck molhado ao redor",
+      "Área de descanso com sombra",
+      "Chuveiros e vestiários próximos",
+      "Limpeza e tratamento diário",
+    ],
+    image: "/WhatsApp Image 2026-02-10 at 12.56.07.jpeg",
+    imageAlt: "Piscinas da Rane Lazer",
+    icon: Waves,
+    accentColor: BLUE,
+  },
+  {
+    id: "churrasqueiras",
+    tag: "02 — Gastronomia",
+    title: "Área de Churrasqueiras",
+    subtitle: "Para o churrasco perfeito",
+    description:
+      "Estrutura coberta com churrasqueira profissional de grande porte, bancadas de apoio completas e toda a infraestrutura necessária para preparar uma refeição inesquecível.",
+    capacity: "Até 70 pessoas",
+    hours: "08h às 22h",
+    features: [
+      "Churrasqueira profissional de grande porte",
+      "Bancadas de apoio em granito",
+      "Pia com água corrente",
+      "2 geladeiras disponíveis",
+      "Área totalmente coberta",
+      "Iluminação para eventos noturnos",
+    ],
+    image: "/WhatsApp Image 2026-02-10 at 12.56.17.jpeg",
+    imageAlt: "Churrasqueiras cobertas da Rane Lazer",
+    icon: ChefHat,
+    accentColor: ORANGE,
+  },
+  {
+    id: "salao",
+    tag: "03 — Eventos",
+    title: "Salão Principal",
+    subtitle: "Palco para grandes momentos",
+    description:
+      "Salão amplo e versátil com capacidade para até 100 pessoas, equipado com sistema de som, iluminação especial e palco — ideal tanto para festas particulares quanto para eventos corporativos.",
+    capacity: "Até 100 pessoas",
+    hours: "08h às 22h",
+    features: [
+      "Capacidade para até 100 pessoas",
+      "Palco estruturado para apresentações",
+      "Sistema de iluminação especial",
+      "14 conjuntos de mesas e cadeiras",
+      "Piso nivelado e amplo",
+      "Banheiros privativos próximos",
+    ],
+    image: "/WhatsApp Image 2026-02-10 at 20.53.06.jpeg",
+    imageAlt: "Salão principal da Rane Lazer",
+    icon: Users,
+    accentColor: BLUE,
+  },
+  {
+    id: "bar",
+    tag: "04 — Bar",
+    title: "Bar Completo",
+    subtitle: "Bebidas geladas e porções",
+    description:
+      "Bar equipado e abastecido com cervejas nacionais e importadas, drinks, destilados premium, energéticos, refrigerantes e porções quentes — tudo para animar qualquer evento.",
+    capacity: "Atende todo o espaço",
+    hours: "08h às 22h",
+    features: [
+      "Cervejas nacionais e importadas",
+      "Drinks e coquetéis",
+      "Destilados premium (Buchanan's, Jack, Old Parr)",
+      "Porções: frango, peixe, batata, calabresa, contrafilé",
+      "Energéticos e não alcoólicos",
+      "Opções para a criançada",
+    ],
+    image: "/WhatsApp Image 2026-02-10 at 20.56.18.jpeg",
+    imageAlt: "Bar da Rane Lazer",
+    icon: Wine,
+    accentColor: ORANGE,
+  },
+  {
+    id: "palco-som",
+    tag: "05 — Entretenimento",
+    title: "Palco & Sistema de Som",
+    subtitle: "Estrutura para shows e apresentações",
+    description:
+      "Palco profissional com sistema de som Paredão de alta potência — para quem quer uma festa com muito volume e energia. Ideal para shows ao vivo, DJs e apresentações culturais.",
+    capacity: "Toda a área",
+    hours: "08h às 22h",
+    features: [
+      "Palco estruturado e nivelado",
+      "Sistema de som Paredão profissional",
+      "Alto-falantes distribuídos no espaço",
+      "Entrada para microfone e instrumentos",
+      "Iluminação de palco disponível",
+      "Suporte técnico no evento",
+    ],
+    image: "/WhatsApp Image 2026-02-10 at 20.59.50.jpeg",
+    imageAlt: "Palco e sistema de som da Rane Lazer",
+    icon: Speaker,
+    accentColor: BLUE,
+  },
+]
+ 
+// ─── COMODIDADES ──────────────────────────────────────────
+const amenities = [
+  { icon: Car,      title: "Estacionamento",    desc: "Vagas na rua em volta do espaço" },
+  { icon: Wifi,     title: "Wi-Fi Gratuito",    desc: "Internet de alta velocidade" },
+  { icon: Music,    title: "Sistema de Som",    desc: "Paredão e caixinha disponíveis" },
+  { icon: Utensils, title: "Cozinha Equipada",  desc: "Geladeira, fogão e utensílios" },
+  { icon: Shield,   title: "Segurança 24h",     desc: "Monitoramento e câmeras" },
+  { icon: Camera,   title: "Área para Fotos",   desc: "Cenários naturais incríveis" },
+]
+ 
+// ─── STATS ────────────────────────────────────────────────
+const stats = [
+  { value: "300m²",  label: "Área total do espaço" },
+  { value: "70",     label: "Pessoas por evento" },
+  { value: "14",     label: "Conjuntos mesa+cadeira" },
+  { value: "500+",   label: "Eventos realizados" },
+]
+ 
+// ─── PÁGINA ───────────────────────────────────────────────
+export default function EstruturaPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <Header />
-
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary/10 to-secondary/10"
-      style={{ backgroundImage: "url('/ChatGPT Image 10 de fev. de 2026, 14_23_09.png')" }}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">Nossa Estrutura</h1>
-            <p className="text-xl text-muted-foreground">
-              Conheça todos os espaços e comodidades que temos para tornar seu evento perfeito
+ 
+      {/* ── HERO ── */}
+      <section className="relative py-28 overflow-hidden bg-[oklch(0.10_0.04_220)]">
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage:
+              "linear-gradient(oklch(0.55 0.15 220) 1px, transparent 1px), linear-gradient(90deg, oklch(0.55 0.15 220) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+        <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[oklch(0.55_0.15_220)]/10 rounded-full blur-[100px]" />
+        <div className="absolute right-1/4 bottom-0 w-72 h-72 bg-[oklch(0.65_0.18_45)]/8 rounded-full blur-[80px]" />
+ 
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 border border-[oklch(0.55_0.15_220)]/40 bg-[oklch(0.55_0.15_220)]/10 rounded-full px-4 py-1.5 mb-6">
+              <Sparkles className="w-3.5 h-3.5 text-[oklch(0.65_0.18_45)]" />
+              <span className="text-[oklch(0.85_0.08_220)] text-sm font-medium tracking-widest uppercase">
+                Tour completo pelo espaço
+              </span>
+            </div>
+            <h1 className="text-5xl sm:text-6xl font-black text-white leading-tight mb-4">
+              Estrutura pensada para{" "}
+              <span style={{ color: ORANGE }}>cada detalhe</span>{" "}
+              do seu evento
+            </h1>
+            <p className="text-white/60 text-lg max-w-xl leading-relaxed mb-8">
+              5 áreas distintas, 300m² de espaço e tudo que você precisa para uma festa inesquecível — de reuniões íntimas a grandes eventos corporativos.
             </p>
+            <div className="flex flex-wrap gap-4">
+              <Button
+                asChild
+                size="lg"
+                className="font-bold px-8 rounded-xl text-white"
+                style={{ backgroundColor: ORANGE, boxShadow: `0 4px 20px ${ORANGE}40` }}
+              >
+                <Link href="/contato">
+                  Solicitar Visita
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="border-white/20 text-white hover:bg-white/10 bg-transparent rounded-xl"
+              >
+                <Link href="/precos">Ver Pacotes e Preços</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
-
-      {/* Spaces Overview */}
-      <section className="py-16 bg-background">
+ 
+      {/* ── STATS ── */}
+      <section className="border-b border-border bg-card">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Nossos Espaços</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Cada área foi pensada para proporcionar conforto, diversão e momentos inesquecíveis
-            </p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-border">
+            {stats.map((stat) => (
+              <div key={stat.label} className="px-8 py-8 text-center">
+                <div className="text-3xl font-black mb-1" style={{ color: ORANGE }}>
+                  {stat.value}
+                </div>
+                <div className="text-muted-foreground text-sm">{stat.label}</div>
+              </div>
+            ))}
           </div>
-
-          <div className="space-y-16">
-            {spaces.map((space, index) => (
-              <div
-                key={space.id}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-center ${
-                  index % 2 === 1 ? "lg:grid-flow-col-dense" : ""
-                }`}
-              >
-                <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <space.icon className="h-6 w-6 text-primary" />
+        </div>
+      </section>
+ 
+      {/* ── TOUR DAS ÁREAS ── */}
+      <section className="py-4 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="space-y-2">
+            {areas.map((area, index) => {
+              const isEven = index % 2 === 0
+              const Icon = area.icon
+              return (
+                <div
+                  key={area.id}
+                  className="grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-shadow duration-500 my-8"
+                >
+                  {/* Imagem */}
+                  <div className={`relative aspect-[4/3] lg:aspect-auto overflow-hidden ${isEven ? "lg:order-1" : "lg:order-2"}`}>
+                    <img
+                      src={area.image}
+                      alt={area.imageAlt}
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                    />
+                    {/* Overlay com tag */}
+                    <div className="absolute top-5 left-5">
+                      <span
+                        className="text-xs font-bold px-3 py-1.5 rounded-full text-white"
+                        style={{ backgroundColor: area.accentColor }}
+                      >
+                        {area.tag}
+                      </span>
                     </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-foreground">{space.title}</h3>
-                      <Badge variant="secondary" className="mt-1">
-                        {space.capacity}
-                      </Badge>
-                    </div>
+                    {/* Gradiente inferior */}
+                    <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent" />
                   </div>
-
-                  <p className="text-muted-foreground mb-6 text-lg">{space.description}</p>
-
-                  <div className="space-y-3">
-                    <h4 className="font-semibold text-foreground">Características:</h4>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {space.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center text-muted-foreground">
-                          <div className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0" />
-                          {feature}
+ 
+                  {/* Conteúdo */}
+                  <div className={`p-10 lg:p-14 flex flex-col justify-center bg-card ${isEven ? "lg:order-2" : "lg:order-1"}`}>
+                    {/* Ícone */}
+                    <div
+                      className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                      style={{ backgroundColor: `${area.accentColor}15` }}
+                    >
+                      <Icon className="w-6 h-6" style={{ color: area.accentColor }} />
+                    </div>
+ 
+                    <h2 className="text-3xl font-black text-foreground mb-1">{area.title}</h2>
+                    <p className="text-muted-foreground font-medium mb-4">{area.subtitle}</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-7">
+                      {area.description}
+                    </p>
+ 
+                    {/* Features */}
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-8">
+                      {area.features.map((f) => (
+                        <li key={f} className="flex items-start gap-2 text-sm text-foreground">
+                          <Check
+                            className="w-4 h-4 mt-0.5 shrink-0"
+                            style={{ color: area.accentColor }}
+                          />
+                          {f}
                         </li>
                       ))}
                     </ul>
+ 
+                    {/* Info linha */}
+                    <div className="flex items-center gap-6 pt-5 border-t border-border">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Users className="w-4 h-4" />
+                        {area.capacity}
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Clock className="w-4 h-4" />
+                        {area.hours}
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-                <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
-                  <img
-                    src={space.image || "/placeholder.svg"}
-                    alt={space.title}
-                    className="rounded-lg shadow-lg w-full h-auto"
-                  />
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>
-
-      {/* Amenities */}
-      <section className="py-16 bg-card">
+ 
+      {/* ── COMODIDADES ── */}
+      <section className="py-20 bg-card border-y border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Comodidades Incluídas</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Tudo que você precisa para um evento completo e sem preocupações
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <div className="h-px w-8" style={{ backgroundColor: ORANGE }} />
+              <span className="text-sm font-semibold tracking-widest uppercase" style={{ color: ORANGE }}>
+                Incluso em todos os pacotes
+              </span>
+              <div className="h-px w-8" style={{ backgroundColor: ORANGE }} />
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-foreground">
+              Comodidades do espaço
+            </h2>
+            <p className="text-muted-foreground mt-2 max-w-lg mx-auto">
+              Tudo que você precisa para um evento completo, sem precisar trazer nada de fora
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {amenities.map((amenity, index) => (
-              <Card key={index} className="border-border hover:shadow-lg transition-shadow duration-300">
-                <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <amenity.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">{amenity.title}</h3>
-                  <p className="text-muted-foreground text-sm">{amenity.description}</p>
-                </CardContent>
-              </Card>
+ 
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
+            {amenities.map(({ icon: Icon, title, desc }) => (
+              <div
+                key={title}
+                className="group bg-background rounded-2xl p-5 border border-border hover:border-[oklch(0.55_0.15_220)]/50 hover:shadow-md transition-all duration-300 text-center cursor-default"
+              >
+                <div
+                  className="w-11 h-11 rounded-xl flex items-center justify-center mx-auto mb-3 transition-transform duration-300 group-hover:scale-110"
+                  style={{ backgroundColor: `${BLUE}15` }}
+                >
+                  <Icon className="w-5 h-5" style={{ color: BLUE }} />
+                </div>
+                <div className="text-xs font-bold text-foreground mb-1">{title}</div>
+                <div className="text-xs text-muted-foreground leading-snug">{desc}</div>
+              </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Capacity Info */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-primary/5 rounded-2xl p-8 text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Capacidade Total</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-              <div>
-                <div className="text-4xl font-bold text-primary mb-2">70 </div>
-                <div className="text-muted-foreground">Pessoas (evento completo, aumento somente com negociação)</div>
+ 
+      {/* ── CAPACIDADE TOTAL ── */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+          <div
+            className="rounded-3xl p-10 md:p-14 text-center relative overflow-hidden"
+            style={{ backgroundColor: `${BLUE}08`, border: `1px solid ${BLUE}20` }}
+          >
+            <div
+              className="absolute inset-0 opacity-[0.03]"
+              style={{
+                backgroundImage: `linear-gradient(${BLUE} 1px, transparent 1px), linear-gradient(90deg, ${BLUE} 1px, transparent 1px)`,
+                backgroundSize: "30px 30px",
+              }}
+            />
+            <div className="relative z-10">
+              <h2 className="text-3xl font-black text-foreground mb-2">Capacidade Total do Espaço</h2>
+              <p className="text-muted-foreground mb-10 max-w-lg mx-auto">
+                Nosso espaço é adaptável para eventos de diferentes portes — de reuniões íntimas a grandes celebrações
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+                {[
+                  { value: "70", label: "Pessoas por evento", sub: "Aumento mediante negociação" },
+                  { value: "14", label: "Conjuntos de mesa+cadeira", sub: "Inclusos em todos os pacotes" },
+                  { value: "300m²", label: "Área total", sub: "5 ambientes distintos" },
+                ].map((item) => (
+                  <div key={item.label}>
+                    <div className="text-4xl font-black mb-1" style={{ color: ORANGE }}>{item.value}</div>
+                    <div className="font-semibold text-foreground text-sm mb-0.5">{item.label}</div>
+                    <div className="text-muted-foreground text-xs">{item.sub}</div>
+                  </div>
+                ))}
               </div>
-              <div>
-                <div className="text-4xl font-bold text-primary mb-2">14</div>
-                <div className="text-muted-foreground">Conjunto de cadeiras</div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-primary mb-2">300m²</div>
-                <div className="text-muted-foreground">Área total do espaço</div>
-              </div>
+              <Button
+                asChild
+                size="lg"
+                className="font-bold px-10 rounded-xl text-white"
+                style={{ backgroundColor: ORANGE }}
+              >
+                <Link href="/contato">
+                  Agendar Visita ao Espaço
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
             </div>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Nosso espaço pode ser adaptado para eventos de diferentes tamanhos, desde reuniões íntimas até grandes
-              celebrações
-            </p>
-            <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
-              <Link href="/contato">Solicitar Orçamento</Link>
-            </Button>
           </div>
         </div>
       </section>
-
-      {/* CTA */}
-      <section className="py-16 bg-primary">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-primary-foreground mb-4">Pronto para conhecer pessoalmente?</h2>
-          <p className="text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-            Agende uma visita e veja como nosso espaço pode ser perfeito para seu próximo evento
+ 
+      {/* ── CTA FINAL ── */}
+      <section className="py-20 bg-[oklch(0.10_0.04_220)] relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage:
+              "linear-gradient(oklch(0.55 0.15 220) 1px, transparent 1px), linear-gradient(90deg, oklch(0.55 0.15 220) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h2 className="text-4xl font-black text-white mb-3">
+            Pronto para conhecer pessoalmente?
+          </h2>
+          <p className="text-white/60 text-lg mb-8 max-w-xl mx-auto">
+            Agende uma visita gratuita, conheça o espaço e tire todas as suas dúvidas antes de reservar.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" variant="secondary" className="text-lg px-8 py-3">
-              <Link href="/contato">Agendar Visita</Link>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Button
+              asChild
+              size="lg"
+              className="font-bold px-10 rounded-xl text-white"
+              style={{ backgroundColor: ORANGE, boxShadow: `0 4px 20px ${ORANGE}40` }}
+            >
+              <Link href="/contato">
+                Agendar Visita Gratuita
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="text-lg px-8 py-3 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
+              className="border-white/20 text-white hover:bg-white/10 bg-transparent rounded-xl"
             >
-              <Link href="/galeria">Ver Galeria</Link>
+              <Link href="/galeria">Ver Galeria de Fotos</Link>
             </Button>
           </div>
         </div>
       </section>
-
+ 
       <Footer />
     </div>
   )
